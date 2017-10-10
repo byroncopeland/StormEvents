@@ -1,4 +1,20 @@
-﻿CREATE PROCEDURE [StormeventsCorrectTypeUpdate] 
+﻿/*----------------------------------------------------------------
+CREATED BY:	Byron Copeland
+DATE:		10/6/17
+COMMENTS:	The purpose of this sp is to fix storm events that have more
+			than one cz_type (designator). Designators are either C for County
+			or Z or Zone. The NOAA Specification says that each event
+			type (hail, flood, tornado, etc) has a designator. Determining
+			the location of each event demands a unique type designator.
+			
+			The finds the types with multiple designators and determines the
+			correct designator using the max count of designators for a 
+			given type and then updates the incorrect records in the raw
+			data table. 
+			
+			This is a one-time operation when new data is inserted. 
+*/----------------------------------------------------------------
+CREATE PROCEDURE [dbo].[StormeventsCorrectTypeUpdate] 
 
 AS
 
