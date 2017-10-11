@@ -3,9 +3,10 @@ A SQL project using storm event .csv files from noaa.gov and converting to a nor
 The event files are available from:
 ftp://ftp.ncdc.noaa.gov/pub/data/swdi/stormevents/csvfiles/
 
-To develop the database, we used the StormEventsdetail files from 2014, 2015 and 2016.
-Each .csv file was inserted using SSIS into the raw working table, tblStormEvents
-To get zone and county details and correlations, we pulled data from:
+To develop the database, we use the StormEvents detail files.
+Each .csv file was inserted using SSIS into the raw working table, tblStormEvents.
+
+To get zone and county details and correlations, we pull data from:
 https://www.weather.gov/source/gis/Shapefiles/County/bp01nv16.dbx
 
 
