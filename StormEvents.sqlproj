@@ -78,5 +78,10 @@
     <Build Include="dbo\Stored Procedures\CountiesListByState.sql" />
     <Build Include="dbo\Stored Procedures\StormeventsListByCounty.sql" />
     <Build Include="dbo\Stored Procedures\SetupStates.sql" />
+    <Build Include="dbo\Stored Procedures\SetupCounty.sql" />
+    <Build Include="dbo\Stored Procedures\SetupEventType.sql" />
+    <Build Include="dbo\Stored Procedures\SetupLocation.sql" />
+    <Build Include="dbo\Stored Procedures\SetupStormEvents.sql" />
+    <Build Include="dbo\Stored Procedures\SetupZone.sql" />
   </ItemGroup>
 </Project>
