@@ -6,7 +6,7 @@ ftp://ftp.ncdc.noaa.gov/pub/data/swdi/stormevents/csvfiles/
 To develop the database, we use the StormEvents detail files.
 Each .csv file was inserted using SSIS into the raw working table, tblStormEvents.
 
-The data columns in the storm event detail file are described in Storm-Data-Export-Format.docx
+The data columns in the storm event detail file are described in **Storm-Data-Export-Format.docx** included in this project.
 
 An issue to overcome with the stormevents table is that there is one location column, cz_fips, and it can represent two different types of IDs, zone or county, based on the cz_type column value, Z or C. We want to be able to see for every storm event record, a county and a county fips. In other words, we want to choose a county and see every event that occured including zone events. 
 
