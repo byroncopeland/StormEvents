@@ -1,4 +1,5 @@
-﻿/*==========================================================
+﻿GO
+/*==========================================================
 CREATED BY:	Byron Copeland
 DATE:		10.7.17
 COMMENTS:	One time setup procedure for populating State table
@@ -9,10 +10,14 @@ COMMENTS:	One time setup procedure for populating State table
 			   codes as prescribed by the NWS so the codes will match
 			   up to the zonecounty table
 ==========================================================
+UPDATED BY: Byron Copeland
+DATE:       10.21.17
+COMMENTS:   Fixed stateID update
+==========================================================
 
 
 */
-CREATE PROCEDURE dbo.SetupStates
+ALTER PROCEDURE [dbo].[SetupStates]
 
 AS 
 
@@ -24,7 +29,9 @@ BEGIN TRY
 	-- Grab states from raw tblStoreEvents using fips and state name which is full
 	INSERT dbo.States (StateID, stateName)
 	SELECT DISTINCT CAST(state_fips AS INT), state
-	  FROM tblStormEvents 
+	  FROM tblStormEvents se
+	       LEFT JOIN dbo.states s ON s.StateName = se.STATE 
+	 WHERE s.StateName is NULL     
 	 ORDER BY cast(state_fips as int);
 
 	--Update States.StateCode from zonecounty table
@@ -40,7 +47,7 @@ BEGIN TRY
 		  from tblstormevents) --full state names
 
 	UPDATE dbo.states 
-	   SET StateCode = zc.state
+	   SET StateCode = zc.state, stateID = se.state_fips --added stateID 10.21.17
 	  FROM dbo.states s
 		   INNER JOIN CTE se on s.statename = se.State
 		   INNER JOIN zonecounty zc on cast(left(zc.fips,2) AS INT) = se.STATE_FIPS

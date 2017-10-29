@@ -6,9 +6,13 @@ COMMENTS:	Populate dbo.Location - the zone and county bridge table
 			A zone can contain several counties
 			A county can have multiple zones 
 ==========================================================
+UPDATED BY: Byron Copeland
+DATE:		10.21.17
+COMMENTS:   Added Case statements for American Territory StateID updates
+==========================================================
 
 */
-CREATE PROCEDURE [dbo].[SetupStormEvents]
+ALTER procedure [dbo].[SetupStormEvents]
 AS
 
 SET NOCOUNT ON;
@@ -22,7 +26,13 @@ BEGIN TRY
 	SELECT
 		EVENT_ID, 
 		EPISODE_ID, 
-		s.StateID,
+		--s.StateID,
+		CASE when se.state =  'Virgin Islands' then 78
+		  WHEN se.state ='American Samoa' then 60
+		  WHEN  se.state ='Guam' THEN 66
+		  WHEN  se.state ='PUERTO RICO' THEN 72
+		  ELSE s.StateID
+		  END AS stateID,
 		se.BEGIN_DATE_TIME, 
 		se.END_DATE_TIME, 
 		se.CZ_TIMEZONE,
@@ -83,7 +93,13 @@ BEGIN TRY
 	SELECT
 		EVENT_ID, 
 		EPISODE_ID, 
-		s.StateID,
+		--s.StateID,
+		CASE when se.state =  'Virgin Islands' then 78
+		  WHEN se.state ='American Samoa' then 60
+		  WHEN  se.state ='Guam' THEN 66
+		  WHEN  se.state ='PUERTO RICO' THEN 72
+		  ELSE s.StateID
+		  END AS stateID,
 		se.BEGIN_DATE_TIME, 
 		se.END_DATE_TIME, 
 		se.CZ_TIMEZONE,
@@ -144,5 +160,3 @@ IF @@trancount > 0 ROLLBACK TRANSACTION
    ;THROW
    RETURN 1
 END CATCH
-GO
-
