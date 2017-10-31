@@ -5,9 +5,12 @@ COMMENTS:	Populate geographical zones within each state
 			A zone can contain several counties
 			A county can have multiple zones
 ==========================================================
-
+UPDATED By: Byron Copeland
+DATE:		10.29.17
+COMMENTS:	Added left join to only insert new records
+===========================================================
 */
-CREATE PROCEDURE [dbo].[SetupZone]
+CREATE procedure [dbo].[SetupZone]
 AS
 
 SET NOCOUNT ON;
@@ -23,11 +26,15 @@ BEGIN TRY
 		   Zone)
 	SELECT DISTINCT 
 	       name, 
-		   statezone, 
+		   zc.statezone, 
 		   state, 
-		   zone 
-	  FROM zonecounty
-	 WHERE name <> '';
+		   zc.zone 
+	  FROM zonecounty zc
+	       INNER JOIN dbo.Zone z
+		   ON zc.state = z.StateCode
+		   AND zc.zone = z.Zone
+	 WHERE name <> ''
+	   AND z.zoneName is NULL;
 
 	 	 COMMIT TRANSACTION;
 END TRY

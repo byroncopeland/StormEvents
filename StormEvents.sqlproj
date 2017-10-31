@@ -83,5 +83,7 @@
     <Build Include="dbo\Stored Procedures\SetupLocation.sql" />
     <Build Include="dbo\Stored Procedures\SetupStormEvents.sql" />
     <Build Include="dbo\Stored Procedures\SetupZone.sql" />
+    <Build Include="dbo\Stored Procedures\LoadStormData.sql" />
+    <Build Include="dbo\Stored Procedures\LoadLookups.sql" />
   </ItemGroup>
 </Project>

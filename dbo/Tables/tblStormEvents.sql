@@ -52,3 +52,15 @@
     [DATA_SOURCE]        VARCHAR (50)   NULL
 );
 
+
+
+
+GO
+CREATE NONCLUSTERED INDEX [idx2_tblstormevents]
+    ON [dbo].[tblStormEvents]([STATE] ASC, [CZ_TYPE] ASC);
+
+
+GO
+CREATE NONCLUSTERED INDEX [idx1_tblstormevents]
+    ON [dbo].[tblStormEvents]([EVENT_TYPE] ASC, [CZ_TYPE] ASC);
+
